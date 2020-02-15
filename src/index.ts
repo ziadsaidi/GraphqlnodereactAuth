@@ -11,10 +11,6 @@ const result = config()
 if (result.error) {
   throw result.error
 }
- 
-console.log(result!.parsed);
-
-
 
 (async ()=>{
     const app = express();
@@ -25,7 +21,8 @@ console.log(result!.parsed);
     const apolloServer = new ApolloServer({
        schema: await buildSchema({
            resolvers:[UserResolver]
-       })
+       }),
+       context: ({req,res})=>({req,res})
     })
 
     apolloServer.applyMiddleware({app})

@@ -1,7 +1,9 @@
-import {Resolver, Query, Mutation, Arg, ObjectType, Field} from 'type-graphql';
+import {Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx} from 'type-graphql';
 import { User } from './entity/User';
 import {hash,compare} from 'bcryptjs'
-import { sign } from 'jsonwebtoken';
+import { BaseEntity } from 'typeorm';
+import { MyContext } from './MyContext';
+import { createAccessToken, createRefreshToken } from './Auth';
 
 @ObjectType()
 class LoginResponse {
@@ -10,7 +12,7 @@ class LoginResponse {
 }
 
 @Resolver()
-export class UserResolver{
+export class UserResolver extends BaseEntity{
 
     @Query(()=>String)
      hello(){
@@ -22,10 +24,13 @@ export class UserResolver{
          return User.find();
      }
 
+
+     //Login Route
      @Mutation(()=>LoginResponse)
      async login(
          @Arg('email') email :string,
-         @Arg('password') password:string
+         @Arg('password') password:string,
+         @Ctx() {res}:MyContext
          ):Promise<LoginResponse>
      {
        
@@ -34,17 +39,22 @@ export class UserResolver{
         if(!user){
             throw new Error("could not find user")
         }
-        //check if the password match
+        //check if the passwords  match
         const valid = await compare(password,user.password);
         if(!valid){
             throw new Error("Invalid Password ??");
         }
 
         //login successful
-        //create Tokin 
+        //create Refresh Token 
+        const refreshToken = createRefreshToken(user)
 
-         const accessToken = sign(password,process.env.ACCESS_TOKEN_SECRET!);
-
+        res.cookie("klid",refreshToken,{
+            httpOnly:true
+        });
+        //create Access Token 
+         const accessToken = createAccessToken(user);
+         
          return {
              accessToken
          }
@@ -52,7 +62,7 @@ export class UserResolver{
      }
      
 
-    
+    //register Route
      @Mutation(()=>Boolean)
      async register(
          @Arg('email') email :string,
