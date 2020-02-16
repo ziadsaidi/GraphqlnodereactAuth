@@ -1,8 +1,8 @@
 Arguments: 
-  /root/.nvm/versions/node/v12.16.0/bin/node /root/.nvm/versions/node/v12.16.0/bin/yarn add @types@jsonwebtoken
+  /root/.nvm/versions/node/v12.16.0/bin/node /root/.nvm/versions/node/v12.16.0/bin/yarn add cookieParser
 
 PATH: 
-  /root/.nvm/versions/node/v12.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/lib/nodejs/bin
+  /root/.nvm/versions/node/v12.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 
 Yarn version: 
   1.22.0
@@ -14,8 +14,8 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types: Request "https://registry.yarnpkg.com/@types" returned a 405
-      at Request.params.callback [as _callback] (/root/.nvm/versions/node/v12.16.0/lib/node_modules/yarn/lib/cli.js:66984:18)
+  Error: https://registry.yarnpkg.com/cookieParser: Not found
+      at Request.params.callback [as _callback] (/root/.nvm/versions/node/v12.16.0/lib/node_modules/yarn/lib/cli.js:66975:18)
       at Request.self.callback (/root/.nvm/versions/node/v12.16.0/lib/node_modules/yarn/lib/cli.js:140727:22)
       at Request.emit (events.js:321:20)
       at Request.<anonymous> (/root/.nvm/versions/node/v12.16.0/lib/node_modules/yarn/lib/cli.js:141699:10)
@@ -40,9 +40,11 @@ npm manifest:
         "typescript": "3.3.3333"
      },
      "dependencies": {
+        "@types/jsonwebtoken": "^8.3.7",
         "apollo-graphql": "^0.4.0",
         "apollo-server-express": "^2.10.0",
         "bcryptjs": "^2.4.3",
+        "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "graphql": "^14.6.0",
         "jsonwebtoken": "^8.5.1",
@@ -265,6 +267,13 @@ Lockfile:
     version "1.5.1"
     resolved "https://registry.yarnpkg.com/@types/http-assert/-/http-assert-1.5.1.tgz#d775e93630c2469c2f980fc27e3143240335db3b"
     integrity sha512-PGAK759pxyfXE78NbKxyfRcWYA/KwW17X290cNev/qAsn9eQIxkH4shoNBafH37wewhDG/0p1cHPbK6+SzZjWQ==
+  
+  "@types/jsonwebtoken@^8.3.7":
+    version "8.3.7"
+    resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.3.7.tgz#ab79ad55b9435834d24cca3112f42c08eedb1a54"
+    integrity sha512-B5SSifLkjB0ns7VXpOOtOUlynE78/hKcY8G8pOAhkLJZinwofIBYqz555nRj2W9iDWZqFhK5R+7NZDaRmKWAoQ==
+    dependencies:
+      "@types/node" "*"
   
   "@types/keygrip@*":
     version "1.0.2"
@@ -1023,6 +1032,11 @@ Lockfile:
     version "6.2.0"
     resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
     integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
+  
+  dotenv@^8.2.0:
+    version "8.2.0"
+    resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+    integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
   
   duplexer3@^0.1.4:
     version "0.1.4"
